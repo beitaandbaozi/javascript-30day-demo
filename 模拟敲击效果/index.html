@@ -59,7 +59,19 @@
   <audio data-key="76" src="sounds/tink.wav"></audio>
 </body>
 <script>
-
+  // 1.定义对应按钮点击就播放对应的音频
+  function playSound(event) {
+    // 获取当前点击按钮的音频
+    const audio = document.querySelector(`audio[data-key="${event.keyCode}"]`)
+    // 处理不存在的音频
+    if (!audio) return
+    // 将上一次播放时间归为0
+    audio.currentTime = 0
+    // 播放
+    audio.play()
+  }
+  // 1.添加键盘事件
+  window.addEventListener('keydown', playSound)
 </script>
 
 </html>
