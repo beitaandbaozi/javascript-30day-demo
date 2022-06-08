@@ -25,8 +25,8 @@ body {
 
 .playing {
   transform:scale(1.1);
-  border-color:#ffc600;
-  box-shadow: 0 0 10px #ffc600;
+  border-color:#00d9ff;
+  box-shadow: 0 0 50px #12f5a9ea;
 }
 
 kbd {
