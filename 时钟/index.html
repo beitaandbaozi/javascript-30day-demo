@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -7,7 +8,15 @@
   <title>Document</title>
   <link rel="stylesheet" href="./index.css">
 </head>
+
 <body>
+  <div class="clock-box">
+    <p class="hour"></p>
+    <span>:</span>
+    <p class="mint"></p>
+    <span>:</span>
+    <p class="second"></p>
+  </div>
   <div class="clock">
     <div class="clock-face">
       <div class="hand hour-hand"></div>
@@ -16,4 +25,37 @@
     </div>
   </div>
 </body>
+<script>
+  const hourHand = document.querySelector('.hour-hand')
+  const minHand = document.querySelector('.min-hand')
+  const secondHand = document.querySelector('.second-hand')
+  // 电子时钟
+  const hourContent = document.querySelector('.hour')
+  const minContent = document.querySelector('.mint')
+  const secondContent = document.querySelector('.second')
+  function setDate() {
+    const now = new Date();
+    // 秒
+    const seconds = now.getSeconds()
+    const secondsDegrees = ((seconds / 60) * 360) + 90
+    // 更改对应的样式
+    secondHand.style.transform = `rotate(${secondsDegrees}deg)`
+    secondContent.innerHTML = seconds
+    // 分
+    const mins = now.getMinutes()
+    const mindsDegrees = ((mins / 60) * 360) + 90
+    // 更改对应的样式
+    minHand.style.transform = `rotate(${mindsDegrees}deg)`
+    minContent.innerHTML = mins
+    // 时
+    const hour = now.getHours()
+    const hourDegrees = ((hour / 120) * 360) + 90
+    // 更改对应的样式
+    hourHand.style.transform = `rotate(${hourDegrees}deg)`
+    hourContent.innerHTML = hour
+  }
+  setInterval(setDate, 1000);
+  setDate();
+</script>
+
 </html>
