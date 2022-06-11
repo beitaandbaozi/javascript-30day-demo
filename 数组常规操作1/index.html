@@ -51,10 +51,12 @@
   console.table(fifteen);
   // 2.展示发明家的姓和名
   const fullName = inventors.map((inventor) => {
-    return  inventor.first + '' + inventor.last
+    return inventor.first + '' + inventor.last
   })
   console.table(fullName);
-
+  // 3.把他们按照出生日期从大到小进行排序
+  const order = inventors.sort((a, b) => (a > b) ? 1 : -1);
+  console.table(order)
 </script>
 
 </html>
