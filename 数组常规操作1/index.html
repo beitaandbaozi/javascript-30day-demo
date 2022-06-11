@@ -67,6 +67,18 @@
     return (a.last > b.last) ? 1 : -1
   })
   console.table(sortName);
+  // 6.统计各个物品的数量
+  const data = ['car', 'car', 'truck', 'truck', 'bike', 'walk', 'car', 'van', 'bike', 'walk', 'car', 'van', 'car',
+    'truck'
+  ];
+  const reduce = data.reduce((obj, item) => {
+    if (!obj[item]) {
+      obj[item] = 0
+    }
+    obj[item]++
+    return obj
+  }, {})
+  console.table(reduce)
 </script>
 
 </html>
