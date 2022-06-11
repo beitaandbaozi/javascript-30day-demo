@@ -61,7 +61,12 @@
   const totalAge = inventors.reduce((total, inventor) => {
     return total + inventor.passed - inventor.year;
   }, 0)
-  console.log('一共活了'+ totalAge + '岁！')
+  console.log('一共活了' + totalAge + '岁！')
+  // 5.people数组按照姓氏进行排序
+  const sortName = people.sort((a, b) => {
+    return (a.last > b.last) ? 1 : -1
+  })
+  console.table(sortName);
 </script>
 
 </html>
