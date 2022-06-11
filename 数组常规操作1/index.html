@@ -57,6 +57,11 @@
   // 3.把他们按照出生日期从大到小进行排序
   const order = inventors.sort((a, b) => (a > b) ? 1 : -1);
   console.table(order)
+  // 4.他们所有人一共活了多少岁
+  const totalAge = inventors.reduce((total, inventor) => {
+    return total + inventor.passed - inventor.year;
+  }, 0)
+  console.log('一共活了'+ totalAge + '岁！')
 </script>
 
 </html>
