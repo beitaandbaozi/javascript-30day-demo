@@ -3,13 +3,12 @@
 
 <head>
   <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Document</title>
-  <link rel="stylesheet" href="./index.css">
+  <title>Ajax Type Ahead 👀</title>
+  <link rel="stylesheet" href="index.css">
 </head>
 
 <body>
+
   <form class="search-form">
     <input type="text" class="search" placeholder="诗句 诗名 诗人">
     <ul class="suggestions">
@@ -17,6 +16,57 @@
       <li></li>
     </ul>
   </form>
+  <script>
+    // const endpoint = 'https://gist.githubusercontent.com/Miserlou/c5cd8364bf9b2420bb29/raw/2bf258763cdddd704f8ffd3ea9a3e81d25e2c6f6/cities.json';
+
+    const endpoint = 'https://gist.githubusercontent.com/soyaine/81399bb2b24ca1bb5313e1985533c640/raw/bdf7df2cbcf70706c4a5e51a7dfb8c933ed78878/TangPoetry.json';
+
+
+    const poetrys = [];
+    fetch(endpoint)
+      .then(blob => blob.json())
+      .then(data => poetrys.push(...data));
+
+    function findMatches(wordToMatch, poetrys) {
+      return poetrys.filter(poet => {
+        // 正则找出匹配的诗句
+        const regex = new RegExp(wordToMatch, 'gi');
+        const author = poet.detail_author.join('');
+        //			console.log(author);
+        return poet.detail_text.match(regex) || poet.title.match(regex) || author.match(regex);
+      });
+    }
+
+    function displayMatches() {
+      const matches = findMatches(this.value, poetrys);
+      console.table(matches)
+      const regex = new RegExp(this.value, 'gi');
+      console.log(regex);
+      const html = matches.map(poet => {
+        // 替换高亮的标签
+        const text = poet.detail_text.replace(regex, `<span class="hl">${this.value}</span>`);
+        console.log(text)
+        const title = poet.title.replace(regex, `<span class="hl">${this.value}</span>`)
+        // 构造 HTML 值
+        return `
+				<li>
+					<span class="poet">${text}</span>
+					<span class="title">${title} - ${poet.detail_author[0]}</span>
+				</li>
+			`;
+      }).join('');
+      //		console.log(html);
+      suggestions.innerHTML = html;
+    }
+
+    const search = document.querySelector('.search');
+    const suggestions = document.querySelector('.suggestions');
+
+    search.addEventListener('change', displayMatches);
+    search.addEventListener('keyup', displayMatches);
+
+    //	console.log(poetrys);
+  </script>
 </body>
 
 </html>
