@@ -42,6 +42,12 @@
     return currentYear - item.year >= 18
   })
   console.table(allAdult)
+  // TODO comments数组
+  // 1.找到ID号为 823423 的评论
+  const comment = comments.find(item => {
+    return item.id == 823423
+  })
+  console.table(comment)
 </script>
 
 </html>
