@@ -48,6 +48,14 @@
     return item.id == 823423
   })
   console.table(comment)
+  // 2.删除 ID 号为 823423 的评论
+  // 1.找到 ID 号为 823423 的索引
+  const index = comments.findIndex(item => {
+    return item.id == 823423
+  })
+  // 数组处理  pop  shift splice slice
+  comments.splice(index, 1)
+  console.table(comments)
 </script>
 
 </html>
