@@ -51,11 +51,18 @@
     // 这里不能用this来表示video，这里面的this表示是每一个button
     video.currentTime += parseFloat(this.dataset.skip)
   }
+  // 音量和播放速度
+  function handleRangeUpdate() {
+    video[this.name] = this.value;
+  }
   video.addEventListener('click', togglePlay);
   video.addEventListener('play', updateButton);
   video.addEventListener('pause', updateButton);
   toggle.addEventListener('click', togglePlay);
   skipButtons.forEach((skipButton) => skipButton.addEventListener('click', skip))
+  ranges.forEach(range => range.addEventListener('change', handleRangeUpdate))
+  // change事件是在元素失去焦点才触发，要想实现"实时"更新的操作，就同事监听鼠标在该元素上的'mousemove'事件执行更新操作
+  ranges.forEach(range => range.addEventListener('mousemove', handleRangeUpdate))
 
 </script>
 
