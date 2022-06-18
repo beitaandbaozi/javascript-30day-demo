@@ -46,10 +46,16 @@
     const icon = this.paused ? '►' : '❚ ❚';
     toggle.textContent = icon
   }
+  // 快进/后退
+  function skip() {
+    // 这里不能用this来表示video，这里面的this表示是每一个button
+    video.currentTime += parseFloat(this.dataset.skip)
+  }
   video.addEventListener('click', togglePlay);
   video.addEventListener('play', updateButton);
   video.addEventListener('pause', updateButton);
   toggle.addEventListener('click', togglePlay);
+  skipButtons.forEach((skipButton) => skipButton.addEventListener('click', skip))
 
 </script>
 
