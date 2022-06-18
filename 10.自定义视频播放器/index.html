@@ -11,10 +11,10 @@
 
 <body>
   <div class="player">
-    <video class="player__video viewer"
-      src="./video.mp4"></video>
+    <video class="player__video viewer" src="./video.mp4"></video>
 
     <div class="player__controls">
+      <!-- 进度条 -->
       <div class="progress">
         <div class="progress__filled"></div>
       </div>
@@ -26,5 +26,21 @@
     </div>
   </div>
 </body>
+<script>
+  // 获取元素
+  const player = document.querySelector('.player')
+  const video = player.querySelector('.viewer')
+  const progress = player.querySelector('.progress');
+  const progressBar = player.querySelector('.progress__filled');
+  const toggle = player.querySelector('.toggle');
+  const skipButtons = player.querySelectorAll('[data-skip]');
+  const ranges = player.querySelectorAll('.player__slider');
+  // 播放/停止
+  function togglePlay() {
+    video.paused ? video.play() : video.pause()
+  }
+  video.addEventListener('click', togglePlay);
+  toggle.addEventListener('click', togglePlay);
+</script>
 
 </html>
