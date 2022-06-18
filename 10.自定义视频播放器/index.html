@@ -55,11 +55,23 @@
   function handleRangeUpdate() {
     video[this.name] = this.value;
   }
+  // 进度条操作(改变`flex-basis` 的百分比值)
+  function handleProgress() {
+    const percent = (video.currentTime / video.duration) * 100
+    progressBar.style.flexBasis = `${percent}%`
+  }
+  // 播放和停止
   video.addEventListener('click', togglePlay);
+  // 播放和停止时候图标切换
   video.addEventListener('play', updateButton);
   video.addEventListener('pause', updateButton);
+  // 进度条
+  video.addEventListener('timeupdate', handleProgress);
+  // 播放和停止
   toggle.addEventListener('click', togglePlay);
+  // 快进/后退
   skipButtons.forEach((skipButton) => skipButton.addEventListener('click', skip))
+  // 音量和播放速度
   ranges.forEach(range => range.addEventListener('change', handleRangeUpdate))
   // change事件是在元素失去焦点才触发，要想实现"实时"更新的操作，就同事监听鼠标在该元素上的'mousemove'事件执行更新操作
   ranges.forEach(range => range.addEventListener('mousemove', handleRangeUpdate))
