@@ -39,8 +39,18 @@
   function togglePlay() {
     video.paused ? video.play() : video.pause()
   }
+  // 图标切换
+  function updateButton() {
+    // this  表示当前的视频
+    // 根据当前的播放状态来判断
+    const icon = this.paused ? '►' : '❚ ❚';
+    toggle.textContent = icon
+  }
   video.addEventListener('click', togglePlay);
+  video.addEventListener('play', updateButton);
+  video.addEventListener('pause', updateButton);
   toggle.addEventListener('click', togglePlay);
+
 </script>
 
 </html>
