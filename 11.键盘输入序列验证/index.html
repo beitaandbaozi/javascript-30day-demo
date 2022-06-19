@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>键盘输入序列验证</title>
+  <script type="text/javascript" src="http://www.cornify.com/js/cornify.js"></script>
+</head>
+
+<body>
+
+</body>
+<script>
+  /**
+   * 1.指定可激发特效的字符串
+   * 2.监听并获取输入的字符
+   * 3.处理输入、在符合条件时，调用cornify
+  */
+  const pressed = []
+  const secretCode = 'beita'
+
+  window.addEventListener('keyup', (e) => {
+    pressed.push(e.key)
+    console.log('-secretCode.length - 1', -secretCode.length - 1)
+    console.log('pressed.length - secretCode.length', pressed.length - secretCode.length);
+    pressed.splice(-secretCode.length - 1, pressed.length - secretCode.length)
+    console.log(pressed)
+    if (pressed.join('').includes(secretCode)) {
+      // 判断是否符合暗号
+      console.log('DING DING!');
+      cornify_add();
+    }
+  })
+</script>
+
+</html>
