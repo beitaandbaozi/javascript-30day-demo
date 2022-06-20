@@ -200,5 +200,43 @@
 
   </div>
 </body>
+<script>
+  // 防抖
+  function debounce(fn, delay = 500) {
+    let timer = null
+    return function () {
+      let arg = arguments
+      clearTimeout(timer)
+      timer = setTimeout(() => {
+        fn.apply(this, arg)
+      }, delay)
+    }
+  }
+  function checkSlide() {
+    // 临界点：下滑到图片的一半、完全滑过图片使图片已不再视窗之内
+    console.log('window.scrollY: ', window.scrollY)
+    console.log('window.innerHeight: ', window.innerHeight)
+    slideImages.forEach((slideImage) => {
+      // 滑动页面的底部距离扣除图片一半的高
+      const slideInAt = (window.scrollY + window.innerHeight) - slideImage.height / 2
+      // 图片底部距离顶端的距离
+      const imgBottom = slideImage.offsetTop + slideImage.height
+      // 临界点判断
+      // 1.滑到了图片的一半
+      const isHalfShown = slideInAt > slideImage.offsetTop
+      // 2.没完全滑过图片
+      const isNotScrolledPast = window.scrollY < imgBottom
+      if (isHalfShown && isNotScrolledPast) {
+        slideImage.classList.add('active');
+      } else {
+        slideImage.classList.remove('active');
+      }
+    })
+  }
+  // 1.获取页面中所有的图片元素
+  const slideImages = document.querySelectorAll('.slide-in')
+  // 2.滚动事件监听
+  window.addEventListener('scroll', debounce(checkSlide))
+</script>
 
 </html>
